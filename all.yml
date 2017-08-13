@@ -1,0 +1,6 @@
+---
+
+- name: Run all roles
+  hosts: localhost
+  roles:
+    - vundle-install
