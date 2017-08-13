@@ -1,0 +1,14 @@
+---
+
+- name: Install ius repo 
+  become: yes
+  yum:
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+
+- name: Install python3
+  become: yes
+  yum:
+    name: '{{ item }}'
+  with_items:
+    - python36u
+    - python36u-devel

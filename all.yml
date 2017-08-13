@@ -3,5 +3,6 @@
 - name: Run all roles
   hosts: localhost
   roles:
-    - vundle-install
-    - vim-install
+    - { role: vundle-install, tags: vundle }
+    - { role: vim-install, tags: vim }
+    - { role: python3-install, tags: python3 }
