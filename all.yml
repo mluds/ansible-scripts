@@ -4,3 +4,4 @@
   hosts: localhost
   roles:
     - vundle-install
+    - vim-install
