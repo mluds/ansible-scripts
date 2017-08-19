@@ -15,6 +15,50 @@
     - git
     - python
     - python-devel
-    - python3
-    - python3-devel
     - tcl-devel
+    - perl
+    - perl-devel
+    - perl-ExtUtils-ParseXS
+    - perl-ExtUtils-XSpp
+    - perl-ExtUtils-CBuilder
+    - perl-ExtUtils-Embed
+
+- name: Create tmp directory
+  tempfile:
+    state: directory
+    suffix: vim-source
+  register: tmp
+
+- name: Clone source
+  git:
+    repo: https://github.com/vim/vim.git
+    dest: '{{ tmp.path }}'
+
+- name: Configure
+  command: >
+    ./configure
+    --with-features=huge
+    --enable-multibyte
+    --enable-rubyinterp=yes
+    --enable-pythoninterp=yes
+    --with-python-config-dir=/usr/lib/python2.7/config
+    --enable-python3interp=yes
+    --with-python3-config-dir=/usr/lib/python3.6/config
+    --enable-perlinterp=yes
+    --enable-luainterp=yes
+    --enable-cscope
+    --prefix=/usr/local
+  args:
+    chdir: '{{ tmp.path }}'
+
+- name: Make
+  make:
+    chdir: '{{ tmp.path }}'
+    params:
+      VIMRUNTIMEDIR: /usr/local/share/vim/vim80
+
+- name: Install
+  become: yes
+  make:
+    chdir: '{{ tmp.path }}'
+    target: install
