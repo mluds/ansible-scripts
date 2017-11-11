@@ -20,6 +20,7 @@
     - perl-ExtUtils-XSpp
     - perl-ExtUtils-CBuilder
     - perl-ExtUtils-Embed
+    - ncurses-devel
 
 - name: Create tmp directory
   tempfile:
