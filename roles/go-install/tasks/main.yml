@@ -1,12 +1,18 @@
 - name: Clear existing go installation directory
   become: yes
   file:
-    path: /usr/local/go
+    path: '{{ path }}/go'
     state: absent
 
 - name: Download and extract go package
   become: yes
   unarchive:
     src: https://redirector.gvt1.com/edgedl/go/go{{ version }}.linux-amd64.tar.gz
-    dest: /usr/local/
+    dest: '{{ path }}'
     remote_src: yes
+
+- name: Add go to path
+  become: yes
+  template:
+    src: go-path.sh
+    dest: /etc/profile.d/go-path.sh
