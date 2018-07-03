@@ -53,7 +53,7 @@
   make:
     chdir: '{{ tmp.path }}'
     params:
-      VIMRUNTIMEDIR: /usr/local/share/vim/vim80
+      VIMRUNTIMEDIR: /usr/local/share/vim/vim81
 
 - name: Install
   become: yes
